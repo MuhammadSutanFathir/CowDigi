@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CowDigi</string>
+    <string name="cow">Sapi</string>
+    <string name="lingkartubuh">Lingkar tubuh (cm)</string>
+    <string name="panjangtubuh">Panjang tubuh (cm)</string>
+    <string name="ukurberat">Ukur Berat</string>
+    <string name="hasil">Hasil</string>
+    <string name="mulai">Mulai Ukur</string>
+</resources>
