@@ -1,6 +1,7 @@
 package com.example.cowdigi
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +42,9 @@ class MeasurementDialogFragment : DialogFragment() {
             }
             binding.hasil.text = "Hasil Prediksi: $formattedPredictions"
             binding.hasil.visibility = View.VISIBLE
+
         }
+
 
         // Tombol hitung di dialog fragment
         binding.buttonUkur.setOnClickListener {
@@ -51,10 +54,10 @@ class MeasurementDialogFragment : DialogFragment() {
             val suhuText = binding.edSuhubadan.text.toString()
 
             try {
-                val lingkarTubuh = lingkarText.toDouble()
-                val panjangTubuh = panjangText.toDouble()
-                val bobotTubuh = bobotText.toInt()
-                val suhuTubuh = suhuText.toInt()
+                val lingkarTubuh = lingkarText.toFloat()
+                val panjangTubuh = panjangText.toFloat()
+                val bobotTubuh = bobotText.toFloat()
+                val suhuTubuh = suhuText.toFloat()
 
                 binding.edLingkartubuh.clearFocus()
                 binding.edPanjangtubuh.clearFocus()

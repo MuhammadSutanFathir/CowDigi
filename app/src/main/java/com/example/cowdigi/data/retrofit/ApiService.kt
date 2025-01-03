@@ -6,9 +6,9 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 data class PredictRequest(
-    val input: Array<Array<Double>>,
-    val bobot_real: Int,
-    val suhu_badan: Int
+    val input: Array<Array<Float>>,
+    val bobot_real: Float,
+    val suhu_badan: Float
 )
 
 interface ApiService {

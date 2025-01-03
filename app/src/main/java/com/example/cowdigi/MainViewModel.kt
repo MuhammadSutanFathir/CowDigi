@@ -1,5 +1,6 @@
 package com.example.cowdigi
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,13 +20,13 @@ class MainViewModel : ViewModel() {
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> get() = _errorMessage
 
-    fun hitungPenjumlahan(lingkarTubuh: Double, panjangTubuh: Double, bobotReal: Int, suhuBadan: Int) {
+    fun hitungPenjumlahan(lebarDada: Float, panjangBadan: Float, bobotReal: Float, suhuBadan: Float) {
         _isLoading.value = true
         _errorMessage.value = null
 
         // Format the request object
         val request = PredictRequest(
-            input = arrayOf(arrayOf(lingkarTubuh, panjangTubuh)),
+            input = arrayOf(arrayOf(lebarDada, panjangBadan)),
             bobot_real = bobotReal,
             suhu_badan = suhuBadan
         )
@@ -33,6 +34,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response: CowResponse = ApiConfig.getApiService().predictWeight(request)
+                Log.d("MainViewModel", "Response: $response")
                 _hasil.value = response
             } catch (e: Exception) {
                 e.printStackTrace()
