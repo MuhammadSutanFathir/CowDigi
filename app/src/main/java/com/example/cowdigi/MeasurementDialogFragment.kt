@@ -36,7 +36,7 @@ class MeasurementDialogFragment : DialogFragment() {
         binding.hasil.visibility = View.INVISIBLE
 
         viewModel.hasil.observe(viewLifecycleOwner) {
-            val formattedPredictions = it.predictions.joinToString(separator = ", ") {
+            val formattedPredictions = it?.predictions?.joinToString(separator = ", ") {
                 String.format("%.2f", it) // Format each prediction to 2 decimal places
             }
             binding.hasil.text = "Hasil Prediksi: $formattedPredictions"
@@ -47,15 +47,21 @@ class MeasurementDialogFragment : DialogFragment() {
         binding.buttonUkur.setOnClickListener {
             val lingkarText = binding.edLingkartubuh.text.toString()
             val panjangText = binding.edPanjangtubuh.text.toString()
+            val bobotText = binding.edBobotreal.text.toString()
+            val suhuText = binding.edSuhubadan.text.toString()
 
             try {
                 val lingkarTubuh = lingkarText.toDouble()
                 val panjangTubuh = panjangText.toDouble()
+                val bobotTubuh = bobotText.toInt()
+                val suhuTubuh = suhuText.toInt()
 
                 binding.edLingkartubuh.clearFocus()
                 binding.edPanjangtubuh.clearFocus()
+                binding.edBobotreal.clearFocus()
+                binding.edSuhubadan.clearFocus()
 
-                viewModel.hitungPenjumlahan(lingkarTubuh, panjangTubuh)
+                viewModel.hitungPenjumlahan(lingkarTubuh, panjangTubuh,bobotTubuh, suhuTubuh)
             } catch (e: NumberFormatException) {
                 Toast.makeText(requireContext(), "Masukkan angka yang valid", Toast.LENGTH_SHORT).show()
             }

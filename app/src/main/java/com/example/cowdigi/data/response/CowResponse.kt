@@ -1,9 +1,14 @@
 package com.example.cowdigi.data.response
 
-import com.google.gson.annotations.SerializedName
-
 data class CowResponse(
-
-	@field:SerializedName("predictions")
+	val inputDetails: InputDetails,
 	val predictions: List<Any>
 )
+
+data class InputDetails(
+	val panjangBadan: Int,
+	val bobotReal: Int,
+	val lebarDada: Int,
+	val suhuBadan: Int
+)
+

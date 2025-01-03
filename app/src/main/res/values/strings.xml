@@ -3,6 +3,8 @@
     <string name="cow">Sapi</string>
     <string name="lingkartubuh">Lingkar tubuh (cm)</string>
     <string name="panjangtubuh">Panjang tubuh (cm)</string>
+    <string name="bobotreal">Bobot real (kg)</string>
+    <string name="suhubadan">Suhu badan (C)</string>
     <string name="ukurberat">Ukur Berat</string>
     <string name="hasil">Hasil</string>
     <string name="mulai">Mulai Ukur</string>

@@ -5,10 +5,17 @@ import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.POST
 
+data class PredictRequest(
+    val input: Array<Array<Double>>,
+    val bobot_real: Int,
+    val suhu_badan: Int
+)
+
 interface ApiService {
     @POST("/predict")
     suspend fun predictWeight(
-        @Body input:Map<String,Array<Array<Double>>>
+        @Body input: PredictRequest
     ): CowResponse
 }
+
 

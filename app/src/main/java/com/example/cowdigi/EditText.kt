@@ -19,7 +19,7 @@ class EditText @JvmOverloads constructor(
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s != null && s.isNotEmpty() && !s.toString().matches(Regex("^[0-9.]+$"))) {
-                    setError("Masukkan angka atau titik", null)
+                    setError("Masukkan angka", null)
                 } else {
                     error = null // Remove error if input is valid or empty
                 }
