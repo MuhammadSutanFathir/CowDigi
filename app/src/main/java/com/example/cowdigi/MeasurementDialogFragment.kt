@@ -14,6 +14,13 @@ class MeasurementDialogFragment : DialogFragment() {
     private lateinit var binding: DialogMeasurementBinding
     private val viewModel: MainViewModel by viewModels()
 
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -56,6 +63,10 @@ class MeasurementDialogFragment : DialogFragment() {
 
         binding.buttonClose.setOnClickListener {
             dismiss()
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
         }
     }
 }
