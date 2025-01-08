@@ -8,4 +8,6 @@
     <string name="ukurberat">Ukur Berat</string>
     <string name="hasil">Hasil</string>
     <string name="mulai">Mulai Ukur</string>
+    <string name="backgroundapp">BackgroundApp</string>
+    <string name="app_desc">Aplikasi Prediksi Berat Badan Sapi</string>
 </resources>
