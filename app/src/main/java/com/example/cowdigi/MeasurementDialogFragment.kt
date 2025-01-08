@@ -1,15 +1,18 @@
 package com.example.cowdigi
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.fragment.app.DialogFragment
 import com.example.cowdigi.databinding.DialogMeasurementBinding
+import java.util.Locale
 
 class MeasurementDialogFragment : DialogFragment() {
     private lateinit var binding: DialogMeasurementBinding
@@ -34,14 +37,23 @@ class MeasurementDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.hasil.visibility = View.INVISIBLE
+        binding.linear2.visibility = View.GONE
+        binding.linear1.visibility = View.VISIBLE
 
         viewModel.hasil.observe(viewLifecycleOwner) {
             val formattedPredictions = it?.predictions?.joinToString(separator = ", ") {
-                String.format("%.2f", it) // Format each prediction to 2 decimal places
+                String.format(Locale.US,"%.2f", it) // Format each prediction to 2 decimal places
             }
             binding.hasil.text = "Hasil Prediksi: $formattedPredictions"
-            binding.hasil.visibility = View.VISIBLE
+            binding.linear1.visibility = View.GONE
+            binding.linear2.visibility = View.VISIBLE
+
+            it?.inputDetails.let {
+                binding.tvLingkarTubuh.text = "Lingkar Tubuh: ${it?.lebarDada}"
+                binding.tvPanjangTubuh.text = "Panjang Tubuh: ${it?.panjangBadan}"
+                binding.tvBobotReal.text = "Bobot Real: ${it?.bobotReal}"
+                binding.tvSuhuBadan.text = "Suhu Badan: ${it?.suhuBadan}"
+            }
 
         }
 
@@ -64,7 +76,11 @@ class MeasurementDialogFragment : DialogFragment() {
                 binding.edBobotreal.clearFocus()
                 binding.edSuhubadan.clearFocus()
 
+                val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(binding.root.windowToken, 0)
+
                 viewModel.hitungPenjumlahan(lingkarTubuh, panjangTubuh,bobotTubuh, suhuTubuh)
+
             } catch (e: NumberFormatException) {
                 Toast.makeText(requireContext(), "Masukkan angka yang valid", Toast.LENGTH_SHORT).show()
             }
